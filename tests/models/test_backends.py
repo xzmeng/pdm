@@ -61,6 +61,7 @@ def test_hatch_expand_variables(monkeypatch):
     assert backend.expand_line("demo=={env:FOO:{env:BAR}}") == "demo==bar"
     assert backend.relative_path_to_url("demo package") == "{root:uri}/demo%20package"
     assert backend.relative_path_to_url("../demo") == "{root:uri}/../demo"
+    assert backend.relative_path_to_url("/demo") == "file:///demo"
 
 
 def test_pdm_backend_expand_variables(monkeypatch):
@@ -72,6 +73,7 @@ def test_pdm_backend_expand_variables(monkeypatch):
     assert backend.expand_line("demo==${BAR}") == "demo==bar"
     assert backend.relative_path_to_url("demo package") == "file:///${PROJECT_ROOT}/demo%20package"
     assert backend.relative_path_to_url("../demo") == "file:///${PROJECT_ROOT}/../demo"
+    assert backend.relative_path_to_url("/demo") == "file:///demo"
 
 
 @pytest.mark.parametrize(

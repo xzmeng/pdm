@@ -155,6 +155,10 @@ def test_show_package_on_pypi(pdm):
     assert result.exit_code == 0
     assert "sphinx-data-viewer" in result.output.splitlines()[0]
 
+    result = pdm(["show", "not-existed-package-zxcvbnm"])
+    assert result.exit_code == 0
+    assert "No match found" in result.stderr
+
 
 def test_show_self_package(project, pdm):
     result = pdm(["show"], obj=project)

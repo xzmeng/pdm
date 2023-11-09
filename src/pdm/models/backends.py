@@ -29,7 +29,7 @@ class BuildBackend(metaclass=abc.ABCMeta):
     @classmethod
     @abc.abstractmethod
     def build_system(cls) -> BuildSystem:
-        pass
+        """Return a dict corresponding to the `[build-system]` table in the pyproject.toml"""
 
 
 class FlitBackend(BuildBackend):
